@@ -1,6 +1,7 @@
 import pygame
 from gas import Gas
 from quadrant import QuadrantSystem
+from physics import Physics
 
 class Window:
     def __init__(self, num_mol=100) -> None:
@@ -15,6 +16,8 @@ class Window:
         self.screen = pygame.display.set_mode((800, 600))
         self.screen.fill((255, 255, 255))
         pygame.display.set_caption("Gas Simulation")
+
+        self.test = Physics()
 
     def game_loop(self, running=True) -> None:
         # Loop
@@ -34,13 +37,23 @@ class Window:
 
             # Collisions resolution
             for collision in collisions:
-                self.molecules[collision[0]].resolve_collision()
-                self.molecules[collision[1]].resolve_collision()
-
+                mol1, mol2 = self.molecules[collision[0]], self.molecules[collision[1]]
+                v1 = [mol1.velocity_x, mol1.velocity_y]
+                v2 = [mol2.velocity_x, mol2.velocity_y]
+                unit = self.test.unit_vector(mol1.get_position(), mol2.get_position())
+                para = self.test.parallel_components(v1, v2, unit)
+                perp = self.test.perpendicular_components(v1, v2, unit)
+                final = self.test.final_velocity(para, perp)
+                mol1.resolve_collision(final[0])
+                mol2.resolve_collision(final[1])
+            
             # Rendering
             for gas in self.molecules:
                 pos_x, pos_y = gas.get_position()
-                pygame.draw.circle(self.screen, (0, 0, 0), (int(pos_x), int(pos_y)), 3)
+                if isinstance(pos_x, (int, float)) and isinstance(pos_y, (int, float)):
+                    pygame.draw.circle(self.screen, (0, 0, 0), (int(pos_x), int(pos_y)), 3)
+                else:
+                    print(f"Invalid position for molecule {gas.number}: {pos_x}, {pos_y}")
 
 
             pygame.display.update()
