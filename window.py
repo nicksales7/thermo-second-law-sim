@@ -3,12 +3,12 @@ from gas import Gas
 from quadrant import QuadrantSystem
 
 class Window:
-    def __init__(self) -> None:
+    def __init__(self, num_mol=100) -> None:
         # Initialize Pygame
         pygame.init()
 
         # Create gas molecules
-        self.molecules = [Gas(number) for number in range(100)]
+        self.molecules = [Gas(number) for number in range(num_mol)]
         self.quadrant = QuadrantSystem()
 
         # Set up display
