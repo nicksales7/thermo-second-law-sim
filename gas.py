@@ -10,9 +10,13 @@ class Gas:
         self.x = 800.0
         self.y = 600.0
 
-        # Initialize velocity
-        self.velocity_x = random.uniform(-1, 1)
-        self.velocity_y = random.uniform(-1, 1)
+        # Initialize initial random velocity
+        self.initial_velocity_x = random.uniform(-1, 1)
+        self.initial_velocity_y = random.uniform(-1, 1)
+
+        # Set current velocity
+        self.velocity_x = self.initial_velocity_x
+        self.velocity_y = self.initial_velocity_y
 
     def get_position(self) -> tuple:
         return self.x, self.y
