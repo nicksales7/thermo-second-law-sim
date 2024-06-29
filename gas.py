@@ -6,9 +6,9 @@ class Gas:
         # Assign a number to the molecule
         self.number = number
 
-        # Initialize position
-        self.x = random.randint(0, 800)
-        self.y = random.randint(0, 600)
+        # Initialize position in small localized corner
+        self.x = random.randint(750, 799) 
+        self.y = random.randint(550, 599)
 
         # Initialize initial random velocity
         self.initial_velocity_x = random.uniform(-1, 1)

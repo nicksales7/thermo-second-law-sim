@@ -3,10 +3,10 @@ A simulation of the second law of thermodynamics using gas particles with elasti
 
 # Features
 - Collisions between gas molecules behave elastically (i.e. no net loss of kinetic energy due to collision).
-- Gas molecules begin in a fixed corner of the closed system (start at very low entropy -> end with very high entropy).
+- Gas molecules begin in a fixed corner (randomized 49x49 pixel box) of the closed system (start at very low entropy -> end with very high entropy).
 
 # TODO
-- Implement proper physics for gas molecule collision.
+- Implement proper physics for gas molecule collision. (Done? Kind of?)
 - Calculate the systems entropy using Boltzmann entropy.
     1. Define microstate (discretize phase space into finite number of bins).
     2. Count microstates (count number of molecules in each bin of phase space).

@@ -24,5 +24,5 @@ class QuadrantSystem:
    
     def get_nearby_molecules(self, quadrant) -> dict:
         nearby = self.quadrants[quadrant].copy()
-        # TODO: Add logic later to implement nearby molecules ine neighboring quadrants 
+        # TODO: Add logic later to implement nearby molecules in neighboring quadrants
         return nearby
