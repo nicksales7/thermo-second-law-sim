@@ -8,6 +8,9 @@ A simulation of the second law of thermodynamics using gas particles with elasti
 # TODO
 - Implement proper physics for gas molecule collision.
 - Calculate the systems entropy using Boltzmann entropy.
+    1. Define microstate (discretize phase space into finite number of bins).
+    2. Count microstates (count number of molecules in each bin of phase space).
+    3. Calculate entropy (Entropy = (Boltzmann constant) * ln(number of microstates))
 - Use matplotlib to visualize the increase in entropy.
 - Possibly add calculation to determine the systems complexity (low entropy, low complexity -> medium entropy, high complexity -> high entropy, low complexity).
 - Optimize, shit is slow af.
