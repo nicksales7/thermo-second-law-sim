@@ -7,8 +7,8 @@ class Gas:
         self.number = number
 
         # Initialize position
-        self.x = 800.0
-        self.y = 600.0
+        self.x = random.randint(0, 800)
+        self.y = random.randint(0, 600)
 
         # Initialize initial random velocity
         self.initial_velocity_x = random.uniform(-1, 1)
@@ -29,18 +29,14 @@ class Gas:
         for number, pos in nearby_molecules.items():
             if number != self.number:
                 distance = self.calculate_distance(self.get_position(), pos)
-                if distance <= 3:
+                if distance <= 2:
                     collisions.append((self.number, number))
         return collisions
 
-    def resolve_collision(self, vel, width=800, height=600)-> None:
-        self.x -= vel[0]
-        self.y -= vel[1]
-
-        if self.x <= 0 or self.x >= width:
-            self.velocity_x = -self.velocity_x
-        if self.y <= 0 or self.y >= height:
-            self.velocity_y = -self.velocity_y
+    def resolve_collision(self, vel, width=800, height=600) -> None:
+        self.velocity_x = vel[0]
+        self.velocity_y = vel[1]
+        self.move_molecule() 
 
     def move_molecule(self, width=800, height=600) -> None:
         # Change in y and change in x
@@ -50,5 +46,8 @@ class Gas:
         # Keep within boundaries
         if self.x <= 0 or self.x >= width:
             self.velocity_x = -self.velocity_x
+            self.x = max(0, min(self.x, width))
         if self.y <= 0 or self.y >= height:
             self.velocity_y = -self.velocity_y
+            self.y = max(0, min(self.y, height))
+
