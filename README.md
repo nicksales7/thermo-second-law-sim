@@ -2,7 +2,7 @@
 A simulation of the second law of thermodynamics using gas particles with elastic collisions in a closed system.
 
 # Features
-- Collisions between gas molecules behave elastically (i.e no net loss of kinetic energy due to collision).
+- Collisions between gas molecules behave elastically (i.e. no net loss of kinetic energy due to collision).
 - Gas molecules begin in a fixed corner of the closed system (start at very low entropy -> end with very high entropy).
 
 # TODO
