@@ -1,12 +1,15 @@
 import pygame as py
 from molecule import Molecule, Molecule_Physics
+from entropy import Entropy
 
 class Simulation:
     def __init__(self, number_of_molecules=100) -> None:
         py.init()
         self.screen = py.display.set_mode((800, 600))
         py.display.set_caption("Gas Simulation")
-        self.molecules, self.physics = [Molecule(number) for number in range(number_of_molecules)], Molecule_Physics()
+        self.molecules, self.physics, self.entropy = [Molecule(number) for number in range(number_of_molecules)], Molecule_Physics(), Entropy()
+        self.iteration = 0
+        # self.positions, self.velocities = [], []
         self.quadrants = {
             0: {},  # Quad 1: 0-199x, 0-299y
             1: {},  # Quad 2: 200-399x, 0-299y 
@@ -44,6 +47,7 @@ class Simulation:
 
     def run(self, running=True) -> None:
         while running:
+            self.iteration += 1
             py.time.delay(10)
             if not self.handle_events(): running = False
             else:
@@ -94,9 +98,15 @@ class Simulation:
     def draw(self) -> None:
         self.screen.fill((255, 255, 255))
         for molecule in self.molecules:
-            pos_x, pos_y = molecule.get_position()
+            pos_x, pos_y = molecule.get_position() 
+            vel_x, vel_y = molecule.get_velocity()
+            # self.positions.append([pos_x, pos_y])
+            # self.velocities.append([vel_x, vel_y]) 
             if isinstance(pos_x, (int, float)) and isinstance(pos_y, (int, float)):
                 py.draw.circle(self.screen, (0, 0, 0), (int(pos_x), int(pos_y)), 3)
             else:
                 print(f"Invalid position for molecule {molecule.number}: {pos_x}, {pos_y}")
+        # self.entropy.plot_entropy(self.iteration, self.entropy.calculate_entropy(self.positions, self.velocities))
+        # self.positions.clear()
+        # self.velocities.clear()
         py.display.flip()

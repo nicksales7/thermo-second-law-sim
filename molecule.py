@@ -13,7 +13,10 @@ class Molecule:
         self.velocity_y = self.initial_velocity_y
    
     def get_position(self) -> tuple:
-        return float(self.x), float(self.y)
+        return self.x, self.y
+
+    def get_velocity(self) -> tuple:
+        return self.velocity_x, self.velocity_y
 
     def calculate_distance(self, m1, m2) -> float:
         return math.sqrt((m2[0] - m1[0])**2 + (m2[1] - m1[1])**2)
@@ -45,7 +48,7 @@ class Molecule:
 
 class Molecule_Physics():
     def __init__(self) -> None:
-        self.k_B = 1.380649e-23  # Boltzmann constant in J/K
+        pass
 
     def unit_vector(self, v1, v2) -> list:
         v2_sub_v1 = np.subtract(v2, v1)
