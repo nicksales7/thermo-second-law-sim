@@ -1,5 +1,5 @@
 import sys
-from window import Window
+from sim import Simulation
 
 def parse_args(default=100):
     # Get molecule arg
@@ -14,7 +14,7 @@ def parse_args(default=100):
 
 if __name__ == "__main__":
     number_of_molecules = parse_args()
-    window = Window(number_of_molecules)
-    window.game_loop()
+    simulation = Simulation(number_of_molecules)
+    simulation.run()
     # test = Physics()
     # print(test.unit_vector([1,2], [4,6]))
