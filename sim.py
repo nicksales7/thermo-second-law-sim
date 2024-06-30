@@ -96,7 +96,7 @@ class Simulation:
         for molecule in self.molecules:
             pos_x, pos_y = molecule.get_position()
             if isinstance(pos_x, (int, float)) and isinstance(pos_y, (int, float)):
-                py.draw.circle(self.screen, (0, 0, 0), (int(pos_x), int(pos_y)), 4)
+                py.draw.circle(self.screen, (0, 0, 0), (int(pos_x), int(pos_y)), 3)
             else:
                 print(f"Invalid position for molecule {molecule.number}: {pos_x}, {pos_y}")
         py.display.flip()

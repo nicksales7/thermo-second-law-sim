@@ -23,7 +23,7 @@ class Molecule:
         for number, pos in nearby_molecules.items():
             if number != self.number:
                 distance = self.calculate_distance(self.get_position(), pos)
-                if distance <= 4:
+                if distance < 3:
                     collisions.append((self.number, number))
         return collisions
 
@@ -45,7 +45,7 @@ class Molecule:
 
 class Molecule_Physics():
     def __init__(self) -> None:
-        pass
+        self.k_B = 1.380649e-23  # Boltzmann constant in J/K
 
     def unit_vector(self, v1, v2) -> list:
         v2_sub_v1 = np.subtract(v2, v1)
