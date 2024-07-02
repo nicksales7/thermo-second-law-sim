@@ -24,19 +24,29 @@ class Molecule:
         return collisions
 
     def resolve_collision(self, vel) -> None:
+
         self.velocity_x, self.velocity_y = vel[0], vel[1]
         self.move_molecule() 
 
     def move_molecule(self, width=800, height=600) -> None:
         self.x += self.velocity_x
         self.y += self.velocity_y
+        x_at_border = self.x <= 1 or self.x >= width - 1
+        y_at_border = self.y <= 1 or self.y >= height - 1
 
-        if self.x <= 0 or self.x >= width:
+        if x_at_border:
             self.velocity_x = -self.velocity_x
-            self.x = max(0, min(self.x, width))
-        if self.y <= 0 or self.y >= height:
+            self.x = max(1, min(self.x, width - 1))
+            if y_at_border:
+                self.velocity_y = -self.velocity_y
+                self.y = max(1, min(self.y, height - 1))
+
+        if y_at_border:
             self.velocity_y = -self.velocity_y
-            self.y = max(0, min(self.y, height))
+            self.y = max(1, min(self.y, height - 1))
+            if not x_at_border and (self.x <= 1 or self.x >= width - 1):
+                self.velocity_x = -self.velocity_x
+                self.x = max(1, min(self.x, width - 1))
 
 class Molecule_Physics():
     def __init__(self) -> None:

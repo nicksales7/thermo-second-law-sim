@@ -41,7 +41,7 @@ class Simulation:
     def run(self) -> None:
         for loop_count in range(self.iterations):
             py.time.delay(10)
-            print(f"Iteration: {loop_count}")
+            # print(f"Iteration: {loop_count}")
             if not self.handle_events(): break
             self.draw()
             py.display.update()
@@ -73,6 +73,7 @@ class Simulation:
             collisions.extend(molecule.detect_collision(nearby))
 
         for collision in collisions:
+            print(collisions)
             mol1, mol2 = self.molecules[collision[0]], self.molecules[collision[1]]
             v1, v2 = [mol1.velocity_x, mol1.velocity_y], [mol2.velocity_x, mol2.velocity_y]
             unit = self.physics.unit_vector(mol1.get_position(), mol2.get_position())
