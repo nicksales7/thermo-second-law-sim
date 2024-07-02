@@ -1,5 +1,4 @@
 import pygame as py
-import numpy as np
 from molecule import Molecule, Molecule_Physics
 
 class Simulation:
@@ -7,12 +6,19 @@ class Simulation:
         py.init() 
         py.display.set_caption("Gas Simulation")
         self.screen = py.display.set_mode((800, 600))
-        self.molecules = [Molecule(number) for number in range(number_of_molecules)]
-        self.physics = Molecule_Physics()
+        self.molecules, self.physics = [Molecule(number) for number in range(number_of_molecules)], Molecule_Physics()
         self.iterations = iterations
-        self.entropy = np.zeros(iterations)
-        self.positions, self.velocities = np.zeros((number_of_molecules, 2)), np.zeros((number_of_molecules, 2))
-        self.quadrants = {i: {} for i in range(8)}
+        self.positions, self.velocities = [], []
+        self.quadrants = {
+            0: {},  # Quad 1: 0-199x, 0-299y
+            1: {},  # Quad 2: 200-399x, 0-299y 
+            2: {},  # Quad 3: 400-599x, 0-299y
+            3: {},  # Quad 4: 600-799x, 0-299y
+            4: {},  # Quad 5: 0-199x, 300-599y
+            5: {},  # Quad 6: 200-399x, 300-599y
+            6: {},  # Quad 7: 400-599x, 300-599y
+            7: {}   # Quad 8: 600-799x, 300-599y
+}
 
     def get_quadrant(self, pos_x, pos_y) -> int:
         if pos_x < 200:
@@ -39,22 +45,17 @@ class Simulation:
         return nearby
 
     def run(self) -> None:
-        for loop_count in range(self.iterations):
-            if loop_count % 100 == 0:  # Update display every 100 iterations
-                py.time.delay(10)
-                print(f"Iteration: {loop_count}")
-                if not self.handle_events():
-                    break
+        loop_count = 0
+        while loop_count < self.iterations: 
+            py.time.delay(10)
+            loop_count += 1
+            print(f"Iteration: {loop_count}")
+            if not self.handle_events(): loop_count = self.iterations + 1
+            else:
+                self.update()            
                 self.draw()
                 py.display.update()
-            
-            self.update()
-            
-            if loop_count % 10 == 0:  # Calculate entropy every 10 iterations
-                self.entropy[loop_count] = self.physics.calculate_entropy(self.positions, self.velocities)
-
         py.quit()
-        self.physics.plot_entropy(self.iterations, self.entropy)
         
     def handle_events(self) -> bool: 
         for event in py.event.get():
@@ -64,11 +65,9 @@ class Simulation:
 
     def update(self) -> None:
         collisions = []
-        for i, molecule in enumerate(self.molecules):
+        for molecule in self.molecules:
             molecule.move_molecule()
             pos_x, pos_y = molecule.get_position()
-            self.positions[i] = [pos_x, pos_y]
-            self.velocities[i] = molecule.get_velocity()
             self.assign_quadrant(pos_x, pos_y, molecule.number)
             quadrant = self.get_quadrant(pos_x, pos_y)
             nearby = self.get_quadrant_molecules(quadrant)
@@ -98,9 +97,16 @@ class Simulation:
 
     def draw(self) -> None:
         self.screen.fill((255, 255, 255))
-        for pos_x, pos_y in self.positions:
+        for molecule in self.molecules:
+            pos_x, pos_y = molecule.get_position() 
+            vel_x, vel_y = molecule.get_velocity()
+            self.positions.append([pos_x, pos_y])
+            self.velocities.append([vel_x, vel_y]) 
             if isinstance(pos_x, (int, float)) and isinstance(pos_y, (int, float)):
                 py.draw.circle(self.screen, (0, 0, 0), (int(pos_x), int(pos_y)), 3)
             else:
-                print(f"Invalid position: {pos_x}, {pos_y}")
+                print(f"Invalid position for molecule {molecule.number}: {pos_x}, {pos_y}")
+        # self.entropy.plot_entropy(self.iteration, self.entropy.calculate_entropy(self.positions, self.velocities))
+        # self.positions.clear()
+        # self.velocities.clear()
         py.display.flip()

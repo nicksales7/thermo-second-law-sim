@@ -1,17 +1,26 @@
 import sys
 from sim import Simulation
 
-def parse_args(default=100):
-    for arg in sys.argv[1:]:
-        if arg.startswith("MOL="):
+def parse_args(molecules=100, iterations=10000) -> tuple:
+    mol = molecules
+    iter = iterations
+    args = sys.argv[1:]
+    
+    for i in range(len(args)):
+        if args[i].startswith("MOL="):
             try:
-                return int(arg.split("=")[1])
+                mol = int(args[i].split("=")[1])
             except ValueError:
                 print("Invalid value for MOL. Using default value.")
-                return default
-    return default
+        elif args[i].startswith("ITER="):
+            try:
+                iter = int(args[i].split("=")[1])
+            except ValueError:
+                print("Invalid value for ITER. Using default value.")
+    
+    return mol, iter
 
 if __name__ == "__main__":
-    number_of_molecules = parse_args()
-    simulation = Simulation(number_of_molecules)
+    mol_count, iter_count = parse_args()
+    simulation = Simulation(mol_count, iter_count)
     simulation.run()
