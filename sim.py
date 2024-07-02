@@ -40,21 +40,19 @@ class Simulation:
 
     def run(self) -> None:
         for loop_count in range(self.iterations):
-            if loop_count % 100 == 0:  # Update display every 100 iterations
-                py.time.delay(10)
-                print(f"Iteration: {loop_count}")
-                if not self.handle_events():
-                    break
-                self.draw()
-                py.display.update()
+            py.time.delay(10)
+            print(f"Iteration: {loop_count}")
+            if not self.handle_events(): break
+            self.draw()
+            py.display.update()
             
             self.update()
             
-            if loop_count % 10 == 0:  # Calculate entropy every 10 iterations
-                self.entropy[loop_count] = self.physics.calculate_entropy(self.positions, self.velocities)
+            # if loop_count % 10 == 0:  # Calculate entropy every 10 iterations
+                # self.entropy[loop_count] = self.physics.calculate_entropy(self.positions, self.velocities)
 
         py.quit()
-        self.physics.plot_entropy(self.iterations, self.entropy)
+        # self.physics.plot_entropy(self.iterations, self.entropy)
         
     def handle_events(self) -> bool: 
         for event in py.event.get():
