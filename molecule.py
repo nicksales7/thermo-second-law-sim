@@ -30,9 +30,7 @@ class Molecule:
 
     def move_molecule(self, width=800, height=600) -> None:
         self.x += self.velocity_x
-        self.y += self.velocity_y
-        x_at_border = self.x <= 1 or self.x >= width - 1
-        y_at_border = self.y <= 1 or self.y >= height - 1
+        self.y += self.velocity_y=
 
         if self.x <= 1 or self.x >= width - 1:
             self.velocity_x = -self.velocity_x
