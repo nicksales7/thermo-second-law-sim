@@ -20,6 +20,6 @@ A simulation of the second law of thermodynamics using gas particles with elasti
 pip install matplotlib numpy pygame
 ```
 ```bash
-# value is number of molecules in the sim, default=100
-python main.py MOL=<value> 
+# value is number of molecules and iterations in the sim, default is 100 and 10000 respectively
+python main.py MOL=<value> ITER=<value> 
 ```
