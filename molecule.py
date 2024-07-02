@@ -34,19 +34,13 @@ class Molecule:
         x_at_border = self.x <= 1 or self.x >= width - 1
         y_at_border = self.y <= 1 or self.y >= height - 1
 
-        if x_at_border:
+        if self.x <= 1 or self.x >= width - 1:
             self.velocity_x = -self.velocity_x
             self.x = max(1, min(self.x, width - 1))
-            if y_at_border:
-                self.velocity_y = -self.velocity_y
-                self.y = max(1, min(self.y, height - 1))
 
-        if y_at_border:
+        if self.y <= 1 or self.y >= height - 1:
             self.velocity_y = -self.velocity_y
             self.y = max(1, min(self.y, height - 1))
-            if not x_at_border and (self.x <= 1 or self.x >= width - 1):
-                self.velocity_x = -self.velocity_x
-                self.x = max(1, min(self.x, width - 1))
 
 class Molecule_Physics():
     def __init__(self) -> None:
