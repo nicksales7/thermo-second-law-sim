@@ -20,17 +20,15 @@ class Molecule:
         return math.sqrt((m2[0] - m1[0])**2 + (m2[1] - m1[1])**2)
 
     def detect_collision(self, nearby_molecules) -> list:
-        collisions = [(self.number, number) for number, pos in nearby_molecules.items() if number != self.number and self.calculate_distance(self.get_position(), pos) < 3]
-        return collisions
+        return [(self.number, number) for number, pos in nearby_molecules.items() if number != self.number and self.calculate_distance(self.get_position(), pos) < 3]
 
     def resolve_collision(self, vel) -> None:
-
         self.velocity_x, self.velocity_y = vel[0], vel[1]
         self.move_molecule() 
 
     def move_molecule(self, width=800, height=600) -> None:
         self.x += self.velocity_x
-        self.y += self.velocity_y=
+        self.y += self.velocity_y
 
         if self.x <= 1 or self.x >= width - 1:
             self.velocity_x = -self.velocity_x
