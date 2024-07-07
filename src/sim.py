@@ -1,7 +1,7 @@
 import pygame as py
 import numpy as np
 from typing import List, Dict, Tuple
-from molecule import Molecule, MoleculePhysics
+from src.molecule import Molecule, MoleculePhysics
 
 class Simulation:
     def __init__(self, number_of_molecules: int = 100, iterations: int = 100000) -> None:

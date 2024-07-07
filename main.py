@@ -1,5 +1,5 @@
 import sys
-from sim import Simulation
+from src.sim import Simulation
 from typing import Tuple, List
 
 def parse_args(molecules: int = 100, iterations: int = 10000) -> Tuple[int, int]:
