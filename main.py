@@ -1,10 +1,11 @@
 import sys
 from sim import Simulation
+from typing import Tuple, List
 
-def parse_args(molecules=100, iterations=10000) -> tuple:
-    mol = molecules
-    iter = iterations
-    args = sys.argv[1:]
+def parse_args(molecules: int = 100, iterations: int = 10000) -> Tuple[int, int]:
+    mol: int = molecules
+    iter: int = iterations
+    args: List[str] = sys.argv[1:]
     
     for i in range(len(args)):
         if args[i].startswith("MOL="):
@@ -21,6 +22,8 @@ def parse_args(molecules=100, iterations=10000) -> tuple:
     return mol, iter
 
 if __name__ == "__main__":
+    mol_count: int
+    iter_count: int
     mol_count, iter_count = parse_args()
-    simulation = Simulation(mol_count, iter_count)
+    simulation: Simulation = Simulation(mol_count, iter_count)
     simulation.run()
