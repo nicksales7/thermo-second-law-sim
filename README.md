@@ -1,4 +1,4 @@
-88# thermo-second-law-sim
+# thermo-second-law-sim
 A simulation of the second law of thermodynamics using gas molecules with elastic collisions in a closed system.
 
 # Features
