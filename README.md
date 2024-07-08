@@ -1,4 +1,4 @@
-# thermo-second-law-sim
+88# thermo-second-law-sim
 A simulation of the second law of thermodynamics using gas molecules with elastic collisions in a closed system.
 
 # Features
@@ -8,8 +8,6 @@ A simulation of the second law of thermodynamics using gas molecules with elasti
 - Calculates entropy by using the Boltzmann-Plank measure of entropy. (i.e. quantifying system disorder using S = (k_B)(ln)(W), where k_B is the Boltzmann constant and W denotes microstate multiplicity)
 
 --- 
-
-This should provide a brief and clear overview for your README.md file!
 - A plot of the increase in entropy starting from t = 0. (lol not yet)
 
 # TODO
