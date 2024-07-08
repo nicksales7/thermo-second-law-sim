@@ -5,6 +5,11 @@ A simulation of the second law of thermodynamics using gas molecules with elasti
 - Collisions between gas molecules behave elastically (i.e. no net loss of kinetic energy due to collision).
   - Collisions are detected by dividing the window into 8 quadrants and checking for nearby molecules within the current quadrant. Do they detect collisions on quadrant boundaries? Of course not, I'm lazy.
 - Gas molecules begin in the bottom right corner (randomized in a 49x49 pixel box) of the window (start at very low entropy -> increase entropy over time).
+- Calculates entropy by using the Boltzmann-Plank measure of entropy. (i.e. quantifying system disorder using S = (k_B)(ln)(W), where k_B is the Boltzmann constant and W denotes microstate multiplicity)
+
+--- 
+
+This should provide a brief and clear overview for your README.md file!
 - A plot of the increase in entropy starting from t = 0. (lol not yet)
 
 # TODO
